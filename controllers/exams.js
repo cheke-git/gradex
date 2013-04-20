@@ -17,7 +17,8 @@ exports.get = function (req, res) {
 };
 
 exports.pdf = function (req, res) {
-	var url = 'http://htmltopdfapi.com/querybuilder/api.php',
+	// var url = 'http://htmltopdfapi.com/querybuilder/api.php',
+	var url = 'http://localhost:3000/api/v0/exams/' + req.params.id + '/render',
 		query = {
 			url: 'http://direct.erickrdch.com:3000/api/v0/exams/' + req.params.id + '/render',
 			orientation: 'portrait',
@@ -97,7 +98,8 @@ exports.pdf = function (req, res) {
 			'replace-value': '',
 		};
 
-	request.get(url + '?' + qs.stringify(query)).pipe(res);
+	// request.get(url + '?' + qs.stringify(query)).pipe(res);
+	request.get(url).pipe(res);
 
 	// res.send(200);
 	// request.get(url + '?' + qs.stringify(query), function(err, resp, body) {
