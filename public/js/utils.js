@@ -1,4 +1,6 @@
 (function (_42, $) {
+	console.log('loading utils...');
+	_42.utils = _42.utils || {};
 	_42.loadTemplate = function (file_name, use_ajax) {
 		if (use_ajax) {
 			$.ajax({
@@ -18,4 +20,4 @@
 			return Handlebars.compile('Error while loading template!');
 		}
 	};
-}(window._42 || {}, $));
+}(window._42 = window._42 || {}, jQuery));

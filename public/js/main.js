@@ -1,51 +1,59 @@
-var _42 = (function(window, document, undefined){
-    var currentView, $viewPort;
-    function loader(_self, vn){
-        vn = vn || 'home';
-        if(currentView){
-            currentView.remove();
-        }
-        currentView = _self[vn].initialize().view;
-        currentView.render();
-        $viewPort.html(currentView.el);
-    }
-    return {
-        initialize : function(){
-            $viewPort = $("#viewPort");
-            this.load();
-        },
-        load : function(viewName){
-            viewName = viewName || 'home';
-            loader(this, viewName);
-        },
-    };
-})(window, document);
-
-_42.home = (function(window, document, undefined){
-    var View = Backbone.View.extend({
-
-        template : 'home',
-
-        events : {
-
+(function (_42, window, document, undefined) {
+    var Router = Backbone.Router.extend({
+        routes: {
+            'home': 'home',
+            'create': 'create',
+            'grade': 'grade',
+            '*default': 'default_route'
         },
 
-        initialize : function(){
+        $viewPort: null,
 
-        }, 
+        currentView: null,
 
-        render : function(){
-            this.$el.html('hola');
-            return this;
+        initialize: function () {
+            this.$viewPort = $("#viewPort");
+        },
+
+        loader: function (vn) {
+            vn = vn || 'home';
+            if (this.currentView) {
+                this.currentView.remove();
+                this.currentView = null;
+            }
+            if (_42[vn]) {
+                this.currentView = _42[vn].initialize().view;
+                this.currentView.render();
+                this.$viewPort.html(this.currentView.el);
+            } else {
+                console.log(vn + ' is not defined yet!');
+            }
+        },
+
+        home: function () {
+            // load home
+            this.loader('home');
+        },
+
+        create: function () {
+            // load create
+            this.loader('create');
+        },
+
+        grade: function () {
+            // load grade
+            this.loader('grade');
+        },
+
+        default_route: function () {
+            this.navigate('home', {
+                trigger: true
+            });
         }
     });
-    var Model = Backbone.Model.extend({});
 
-    return {
-        initialize : function(){
-            var model = new Model({});
-            this.view = new View({model : model});
-            return this;
-        }
-    }
-})(window, document)
+    $(function () {
+        _42.router = new Router();
+        Backbone.history.start();
+    });
+}(window._42 = window._42 || {}, window, document));
