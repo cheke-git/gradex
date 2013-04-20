@@ -1,6 +1,8 @@
 (function (_42, window, document, undefined) {
     var View = Backbone.View.extend({
 
+        el: '#viewPort',
+
         template: 'grade',
 
         events: {
@@ -12,19 +14,13 @@
         },
 
         render: function () {
-            this.$el.html(' <div data-role="header" data-position="inline">
-        <h1>Home</h1>
-      </div>
-      <div data-role="content" data-theme="a">
-        <a data-role="button" href="#">Create</a>
-        <a data-role="button" href="#">Grade</a>
-      </div>');
+            this.$el.html();
             return this;
         }
     });
     var Model = Backbone.Model.extend({});
 
-    _42.grade = {
+    _42.home = {
         initialize: function () {
             var model = new Model({});
             this.view = new View({

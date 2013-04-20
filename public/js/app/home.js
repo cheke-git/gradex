@@ -6,7 +6,7 @@
         template: 'home',
 
         events: {
-
+            'click  a' : 'clickHandler'
         },
 
         initialize: function () {
@@ -15,12 +15,25 @@
 
         render: function () {
             this.$el.html(
-                '<div data-role="header" data-position="inline">'+
-                '<h1>Home</h1></div><div data-role="content" data-theme="a">'+
-                '<a data-role="button" href="#">Create</a>'+
-                '<a data-role="button" href="#">Grade</a></div>');
+                '<div  data-role="page" data-theme="a" id="'+this.template+'">'+
+                '<div data-role="content" data-theme="a">'+
+                '<img class="center logo" src="img/logo_gradex.png" />'+
+                '<a class="create" data-role="button" href="#create">Create</a>'+
+                '<a data-role="button" href="#grade">Grade</a></div>'+
+                '</div>'
+                );
             return this;
-        }
+        },
+        remove : function(){
+            this.$el.html('');
+            this.stopListening();
+        },
+        clickHandler : function(e){
+            e.preventDefault();
+            var section = $(e.currentTarget).attr('href');
+            _42.router.navigate(section, {trigger : true});
+        },
+
     });
     var Model = Backbone.Model.extend({});
 
