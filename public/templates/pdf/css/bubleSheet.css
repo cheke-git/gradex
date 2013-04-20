@@ -1,0 +1,65 @@
+/* image backgrounds */
+.diana{
+	background-image:url(../images/diana.gif);
+	width:100px;
+	height:100px;
+	display:block;
+	position:absolute;
+}
+
+body{
+	margin:0;
+	padding:0;
+	font-family:Arial;
+}
+
+.wrapper{
+	padding:50px 100px;	
+	width:600px;
+	margin:0 auto;
+}
+
+.header{
+	width:100%;
+}
+
+.bubbles-container{
+	position:relative;
+	padding:100px;
+	min-height:500px;
+}
+
+.bubles{
+	width:100%;
+}
+
+.bubble{
+
+}
+
+.bubles td{
+	height:60px;
+	text-align:center;
+}
+
+.bubles tr td:first-child, .bubles tr th:first-child{
+	width:40px;
+	background-image:none;
+	
+}
+
+
+.diana-top-left{
+	top:0;
+	left:0;
+}
+
+.diana-top-right{
+	top:0;
+	right:0;
+}
+
+.diana-bottom-left{
+	bottom:0;
+	left:0;
+}
