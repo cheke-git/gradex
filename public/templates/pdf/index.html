@@ -1,17 +1,17 @@
 <html>
 <head>
-	<link rel="stylesheet" href="css/bubleSheet.css" media="screen" />
-	<link rel="stylesheet" href="css/bubleSheet.css" media="print" />
+	<link rel="stylesheet" href="/templates/pdf/css/bubleSheet.css" media="screen" />
+	<link rel="stylesheet" href="/templates/pdf/css/bubleSheet.css" media="print" />
 </head>
 <body>
 	<div class="wrapper">
 		<div class="header">
 			<h2>{{name}}</h2>
 		</div>
-		<div class="bubbles-container">			
-			<span class='diana diana-top-left'><img src="images/diana.gif"></span>
-			<span class='diana diana-top-right'><img src="images/diana.gif"></span>
-			<span class='diana diana-bottom-left'><img src="images/diana.gif"></span>
+		<div class="bubbles-container">
+			<span class='diana diana-top-left'><img src="/templates/pdf/images/diana.gif"></span>
+			<span class='diana diana-top-right'><img src="/templates/pdf/images/diana.gif"></span>
+			<span class='diana diana-bottom-left'><img src="/templates/pdf/images/diana.gif"></span>
 			<table class='bubles' border=0>
 				<thead>
 					<tr>
@@ -24,22 +24,22 @@
 					</tr>
 				</thead>
 				<tbody>
-					{{#each answers}}
-					<tr>						
-						<td>{{@index}}</td>
-						<td><img class="bubble" src="images/bubble.gif"/></td>
-						<td><img class="bubble" src="images/bubble.gif"/></td>
-						<td><img class="bubble" src="images/bubble.gif"/></td>
-						<td><img class="bubble" src="images/bubble.gif"/></td>
-						<td><img class="bubble" src="images/bubble.gif"/></td>
+					{{#answers}}
+					<tr>
+						<td>{{number}}</td>
+						<td><img class="bubble" src="/templates/pdf/images/bubble.gif"/></td>
+						<td><img class="bubble" src="/templates/pdf/images/bubble.gif"/></td>
+						<td><img class="bubble" src="/templates/pdf/images/bubble.gif"/></td>
+						<td><img class="bubble" src="/templates/pdf/images/bubble.gif"/></td>
+						<td><img class="bubble" src="/templates/pdf/images/bubble.gif"/></td>
 					</tr>
-					{{/each}}
+					{{/answers}}
 				</tbody>
 			</table>
-		</div>		
+		</div>
 	</div>
-	
-	
+
+
 </body>
-	
+
 </html>

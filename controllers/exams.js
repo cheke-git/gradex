@@ -1,5 +1,7 @@
 var request = require('request'),
 	qs = require('querystring'),
+	fs = require('fs'),
+	hogan = require('hjs'),
 	Exam = require('../models/exam.js').Exam;
 
 exports.list = function (req, res) {
@@ -9,17 +11,17 @@ exports.list = function (req, res) {
 };
 
 exports.get = function (req, res) {
-	Exam.get(req.params.id, function (err, exams) {
-		res.json(exams);
+	Exam.get(req.params.id, function (err, exam) {
+		res.json(exam);
 	});
 };
 
 exports.pdf = function (req, res) {
 	var url = 'http://htmltopdfapi.com/querybuilder/api.php',
 		query = {
-			url: 'http://www.google.com/',
+			url: 'http://direct.erickrdch.com:3000/api/v0/exams/' + req.params.id + '/render',
 			orientation: 'portrait',
-			grayscale: 'false',
+			grayscale: 'true',
 			outline: 'true',
 			page_width: '210',
 			page_height: '297',
@@ -68,9 +70,9 @@ exports.pdf = function (req, res) {
 			stop_slow_scripts: 'true',
 			forms: 'false',
 			print_media_type: 'false',
-			disable_internal_links: 'false',
-			disable_external_links: 'false',
-			disable_javascript: 'false',
+			disable_internal_links: 'true',
+			disable_external_links: 'true',
+			disable_javascript: 'true',
 			disable_smart_shrinking: 'false',
 			disable_pdf_compression: 'false',
 			zoom: '1',
@@ -95,11 +97,30 @@ exports.pdf = function (req, res) {
 			'replace-value': '',
 		};
 
-	request({
-		url: url,
-		// qs: qs.stringify(query)
-	}, function (err, response, body) {
-		res.send(body);
+	request.get(url + '?' + qs.stringify(query)).pipe(res);
+
+	// res.send(200);
+	// request.get(url + '?' + qs.stringify(query), function(err, resp, body) {
+	// 	fs.writeFile(__dirname + '/../pdfs/' + req.params.id + '.pdf', body, 'binary', function(err) {
+	// 		console.log('writeFile done!');
+	// 	});
+	// });
+};
+
+exports.render = function (req, res) {
+	var template;
+	Exam.get(req.params.id, function (err, exam) {
+		fs.readFile(__dirname + '/../public/templates/pdf/index.html', 'utf-8', function (err, data) {
+			console.log(typeof data);
+			template = hogan.compile(data);
+			exam.answers = exam.answers.map(function (answer, key) {
+				return {
+					number: key + 1,
+					answer: answer
+				};
+			});
+			res.send(template.render(exam));
+		});
 	});
 };
 

@@ -1,7 +1,7 @@
+/*globals Handlebars:false*/
 (function (_42, $) {
-	console.log('loading utils...');
 	_42.utils = _42.utils || {};
-	_42.loadTemplate = function (file_name, use_ajax) {
+	_42.utils.loadTemplate = function (file_name, use_ajax) {
 		if (use_ajax) {
 			$.ajax({
 				url: 'js/app/templates/' + name,
