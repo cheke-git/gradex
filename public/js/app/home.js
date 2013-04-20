@@ -4,6 +4,7 @@
 
         events: {
             'click  a.photo' : 'takePhoto',
+            'click  a.'
 
         },
 
@@ -25,17 +26,39 @@
             _42.router.navigate(section, {trigger : true});
         },
         takePhoto : function(){
+            /*
             navigator.camera.getPicture(onSuccess, onFail, { quality: 50, 
                 destinationType: Camera.DestinationType.FILE_URI }); 
 
             function onSuccess(imageURI) {
+                /*
                 var image = document.getElementById('myImage');
                 image.src = imageURI;
+                *
+                plugins.fileUploader.uploadByUri({
+                    server : '',
+                    file : imageURI,
+                    fileKey : '',
+                    params : '',
+                    fileName : 'test.png',
+                    mimeType : 'image/jpg',
+                    callback : function(){
+                        //success
+                    },
+                    fail : function(){
+                        //Fail
+                    }
+
+                });
             }
 
             function onFail(message) {
                 alert('Failed because: ' + message);
             }
+            */
+           var options = { limit: 1 };
+
+            navigator.device.capture.captureImage(function(){}, function(){}, options);
 
         }
 
