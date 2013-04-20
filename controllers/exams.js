@@ -107,20 +107,50 @@ exports.pdf = function (req, res) {
 	// });
 };
 
-exports.render = function (req, res) {
-	var template;
-	Exam.get(req.params.id, function (err, exam) {
-		fs.readFile(__dirname + '/../public/templates/pdf/index.html', 'utf-8', function (err, data) {
-			console.log(typeof data);
-			template = hogan.compile(data);
-			exam.answers = exam.answers.map(function (answer, key) {
-				return {
-					number: key + 1,
-					answer: answer
-				};
+function process_answers(answers, answered) {
+	return answers.map(function (answer, key) {
+		var options = [],
+			i = 0;
+
+		for (; i < 5; i++) {
+			options.push({
+				image: answered && i + 1 === answer ? 'On' : ''
 			});
-			res.send(template.render(exam));
+		}
+
+		return {
+			number: key + 1,
+			options: options
+		};
+	});
+}
+
+function load_template(callback) {
+	var template;
+	fs.readFile(__dirname + '/../public/templates/pdf/index.html', 'utf-8', function (err, data) {
+		template = hogan.compile(data);
+		callback(err, template);
+	});
+}
+
+function render(id, answered, callback) {
+	Exam.get(id, function (err, exam) {
+		load_template(function (err, template) {
+			exam.answers = process_answers(exam.answers, answered);
+			callback(err, template.render(exam));
 		});
+	});
+}
+
+exports.render = function (req, res) {
+	render(req.params.id, false, function (err, html) {
+		res.send(html);
+	});
+};
+
+exports.answers = function (req, res) {
+	render(req.params.id, true, function (err, html) {
+		res.send(html);
 	});
 };
 

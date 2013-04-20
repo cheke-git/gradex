@@ -27,11 +27,9 @@
 					{{#answers}}
 					<tr>
 						<td>{{number}}</td>
-						<td><img class="bubble" src="/templates/pdf/images/bubble.gif"/></td>
-						<td><img class="bubble" src="/templates/pdf/images/bubble.gif"/></td>
-						<td><img class="bubble" src="/templates/pdf/images/bubble.gif"/></td>
-						<td><img class="bubble" src="/templates/pdf/images/bubble.gif"/></td>
-						<td><img class="bubble" src="/templates/pdf/images/bubble.gif"/></td>
+						{{#options}}
+						<td><img class="bubble" src="/templates/pdf/images/bubble{{image}}.gif"/></td>
+						{{/options}}
 					</tr>
 					{{/answers}}
 				</tbody>
