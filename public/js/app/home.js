@@ -1,6 +1,8 @@
 (function (_42, window, document, undefined) {
     var View = Backbone.View.extend({
 
+        el: '#viewPort',
+
         template: 'home',
 
         events: {
@@ -12,13 +14,11 @@
         },
 
         render: function () {
-            this.$el.html(' <div data-role="header" data-position="inline">
-        <h1>Home</h1>
-      </div>
-      <div data-role="content" data-theme="a">
-        <a data-role="button" href="#">Create</a>
-        <a data-role="button" href="#">Grade</a>
-      </div>');
+            this.$el.html(
+                '<div data-role="header" data-position="inline">'+
+                '<h1>Home</h1></div><div data-role="content" data-theme="a">'+
+                '<a data-role="button" href="#">Create</a>'+
+                '<a data-role="button" href="#">Grade</a></div>');
             return this;
         }
     });
