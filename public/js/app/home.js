@@ -1,6 +1,8 @@
 (function (_42, window, document, undefined) {
     var View = Backbone.View.extend({
 
+        el: '#viewPort',
+
         template: 'home',
 
         events: {

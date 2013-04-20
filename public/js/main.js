@@ -24,8 +24,8 @@
             if (_42[vn]) {
                 this.currentView = _42[vn].initialize().view;
                 this.currentView.render();
-                this.$viewPort.html(this.currentView.el);
-                $.mobile.changePage();
+                this.$viewPort.append(this.currentView.el);
+                this.$viewPort.trigger('create');
             } else {
                 console.log(vn + ' is not defined yet!');
             }
