@@ -1,12 +1,10 @@
 (function (_42, window, document, undefined) {
     var View = Backbone.View.extend({
-
-        el: '#viewPort',
-
         template: 'home',
 
         events: {
-            'click  a' : 'clickHandler'
+            'click  a.photo' : 'takePhoto',
+
         },
 
         initialize: function () {
@@ -26,6 +24,20 @@
             var section = $(e.currentTarget).attr('href');
             _42.router.navigate(section, {trigger : true});
         },
+        takePhoto : function(){
+            navigator.camera.getPicture(onSuccess, onFail, { quality: 50, 
+                destinationType: Camera.DestinationType.FILE_URI }); 
+
+            function onSuccess(imageURI) {
+                var image = document.getElementById('myImage');
+                image.src = imageURI;
+            }
+
+            function onFail(message) {
+                alert('Failed because: ' + message);
+            }
+
+        }
 
     });
     var Model = Backbone.Model.extend({
