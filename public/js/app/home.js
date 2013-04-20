@@ -14,14 +14,7 @@
         },
 
         render: function () {
-            this.$el.html(
-                '<div  data-role="page" data-theme="a" id="'+this.template+'">'+
-                '<div data-role="content" data-theme="a">'+
-                '<img class="center logo" src="img/logo_gradex.png" />'+
-                '<a class="create" data-role="button" href="#create">Create</a>'+
-                '<a data-role="button" href="#grade">Grade</a></div>'+
-                '</div>'
-                );
+            this.$el.html(Handlebars.templates[this.model.get('_id') + '.hb'](this.model.toJSON()));
             return this;
         },
         remove : function(){
@@ -35,11 +28,12 @@
         },
 
     });
-    var Model = Backbone.Model.extend({});
+    var Model = Backbone.Model.extend({
+    });
 
     _42.home = {
         initialize: function () {
-            var model = new Model({});
+            var model = new Model({_id : 'home'});
             this.view = new View({
                 model: model
             });

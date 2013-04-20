@@ -25,7 +25,7 @@
                 this.navigate(vn, {trigger : false});
                 this.currentView = _42[vn].initialize().view;
                 this.currentView.render();
-                this.$viewPort.append(this.currentView.el);
+                //this.$viewPort.append(this.currentView.el);
                 this.currentView.$el.find('#' + this.currentView.template).page();
                 //$.mobile.changePage(  this.currentView.$el.find('#' + this.currentView.template), {transition : 'pop'});
                 this.currentView.$el.find('#' + this.currentView.template).fadeIn('slow');

@@ -20,7 +20,7 @@
     });
     var Model = Backbone.Model.extend({});
 
-    _42.home = {
+    _42.grade = {
         initialize: function () {
             var model = new Model({});
             this.view = new View({
