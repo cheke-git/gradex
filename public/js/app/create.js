@@ -1,43 +1,5 @@
-(function (_42, window, document, undefined) {
-    var View = Backbone.View.extend({
-
-        events: {
-            'click  a' : 'clickHandler'
-        },
-
-        initialize: function () {
-
-        },
-
-        render: function () {
-            this.$el.html(Handlebars.templates[this.model.get('_id') + '.hb'](this.model.toJSON()));
-            return this;
-        },
-        remove : function(){
-            this.$el.html('');
-            this.stopListening();
-        },
-        clickHandler : function(e){
-            e.preventDefault();
-            var section = $(e.currentTarget).attr('href');
-            _42.router.navigate(section, {trigger : true});
-        },
-
-    });
-    var Model = Backbone.Model.extend({
-    });
-
-    _42.create = {
-        initialize: function () {
-            var model = new Model({_id : 'create'});
-            this.view = new View({
-                model: model
-            });
-            return this;
-        },
-
-        remove: function() {
-           this.view.remove();
-        }
-    };
-}(window._42 = window._42 || {}, window, document));
+define(['app/page', 'app/utils', 'app/dispatcher'], function (Page, utils, dispatcher) {
+  return Page.extend({
+    id: 'create'
+ });
+});

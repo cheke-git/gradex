@@ -1,63 +1,63 @@
-(function (_42, window, document, undefined) {
-    var Router = Backbone.Router.extend({
-        routes: {
-            'home': 'home',
-            'create': 'create',
-            'grade': 'grade',
-            '*default': 'default_route'
-        },
+require.config({
+  paths: {
+    'jquery': 'libs/jquery/jquery-1.9.1',
+    'jqm': 'libs/jqm/jquery.mobile-1.3.1',
+    'jqmNavigator': 'libs/jqm/jqmNavigator',
+    'underscore': 'libs/underscore/underscore',
+    'handlebars': 'libs/handlebars/handlebars',
+    'backbone-raw': 'libs/backbone/backbone-raw',
+    'backbone-super': 'libs/backbone/backbone-super',
+    'backbone': 'libs/backbone/backbone',
+    'text': 'libs/requirejs/text',
+    'css': 'libs/requirejs/css',
+    'normalize': 'libs/requirejs/normalize'
+  },
+  shim: {
+    underscore: {
+      exports: '_'
+    },
+    'backbone-raw': {
+      deps: ['underscore', 'jquery'],
+      exports: 'Backbone'
+    },
+    'backbone-super': {
+      deps: ['backbone-raw']
+    },
+    jqm: {
+      deps: ['jquery', 'jqmNavigator']
+    },
+    'handlebars': {
+      exports: 'Handlebars'
+    }
+  }
+});
 
-        $viewPort: null,
+require([
+  'backbone', 'app/dispatcher', 'app/home', 'app/create', 'app/create', 'jqm'
+], function(Backbone, dispatcher, HomeView, CreateView, GradeView) {
 
-        currentView: null,
+  dispatcher.on('app:pop_view', function() {
+    $.mobile.jqmNavigator.popView();
+  });
 
-        initialize: function () {
-            this.$viewPort = $("#viewPort");
-        },
+  dispatcher.on('app:navigate', function(page) {
+    switch(page) {
+    case 'home':
+      $.mobile.jqmNavigator.pushView(new HomeView());
+      break;
 
-        loader: function (vn) {
-            vn = vn || 'home';
-            if (this.currentView) {
-                this.currentView.remove();
-                this.currentView = null;
-            }
-            if (_42[vn]) {
-                this.navigate(vn, {trigger : false});
-                this.currentView = _42[vn].initialize().view;
-                this.currentView.render();
-                this.$viewPort.append(this.currentView.$el.html());
-                this.$viewPort.page();
-                this.$viewPort.show();
-                this.$viewPort.find('#' + this.currentView.model.get('_id')).first().show();
-            } else {
-                console.log(vn + ' is not defined yet!');
-            }
-        },
+    case 'create':
+      $.mobile.jqmNavigator.pushView(new CreateView());
+      break;
 
-        home: function () {
-            // load home
-            this.loader('home');
-        },
+    case 'grade':
+      $.mobile.jqmNavigator.pushView(new GradeView());
+      break;
 
-        create: function () {
-            // load create
-            this.loader('create');
-        },
+    default:
+      alert('Module ' + page + ' is not ready yet!');
+    }
+  });
 
-        grade: function () {
-            // load grade
-            this.loader('grade');
-        },
-
-        default_route: function () {
-            this.navigate('home', {
-                trigger: true
-            });
-        }
-    });
-
-    $(function () {
-        _42.router = new Router();
-        Backbone.history.start();
-    });
-}(window._42 = window._42 || {}, window, document));
+  dispatcher.trigger('app:navigate', 'home');
+});
