@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/42.min.css" />
+    <link rel="stylesheet" href="css/jquery.mobile.structure-1.3.1.min.css" />
+    <link rel="stylesheet" href="css/main.css" />
+
+    <!-- Scripts -->
+    <script src="js/libs/cordova-2.6.0.js"></script>
+
+    <!-- jQuery & Plugins -->
+    <script src="js/libs/jquery-1.9.1.js"></script>
+    <script src="js/libs/fileUploader.js"></script>
+
+    <script>
+      $(document).on("mobileinit", function(){
+        $.mobile.pushStateEnabled = false;
+        console.log('jQuery Mobile configured!');
+      });
+    </script>
+    <script src="js/libs/jquery.mobile-1.3.1.js"></script>
+
+    <!-- Underscore, Backbone -->
+    <script src="js/libs/underscore.js"></script>
+    <script src="js/libs/backbone.js"></script>
+    <script src="js/libs/backbone-super.js"></script>
+
+    <!-- Templates -->
+    <script src="js/libs/handlebars.js"></script>
+    <script src="js/app/templates.js"></script>
+
+    <!-- Application -->
+    <script src="js/app/utils.js"></script>
+    <script src="js/app/home.js"></script>
+    <!-- <script src="js/app/create.js"></script> -->
+    <!-- <script src="js/app/grade.js"></script> -->
+    <script src="js/main.js"></script>
+  </head>
+  <body id='viewPort'></body>
+</html>

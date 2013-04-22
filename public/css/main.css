@@ -1,0 +1,25 @@
+.center {
+	display: block;
+	margin: 0 auto;
+}
+
+.logo {
+	max-width: 175px;
+	margin-top: 5px;
+	margin-bottom: 50px;
+}
+
+.page {
+	background: #0e96db; /* Old browsers */
+	background: -moz-radial-gradient(center, ellipse cover,  #0e96db 0%, #336666 100%); /* FF3.6+ */
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#0e96db), color-stop(100%,#336666)); /* Chrome,Safari4+ */
+	background: -webkit-radial-gradient(center, ellipse cover,  #0e96db 0%,#336666 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-radial-gradient(center, ellipse cover,  #0e96db 0%,#336666 100%); /* Opera 12+ */
+	background: -ms-radial-gradient(center, ellipse cover,  #0e96db 0%,#336666 100%); /* IE10+ */
+	background: radial-gradient(ellipse at center,  #0e96db 0%,#336666 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0e96db', endColorstr='#336666',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.page .ui-content {
+	background: none;
+}
